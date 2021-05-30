@@ -10,4 +10,6 @@ import com.hardik.killercroc.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
+	Boolean existsByEmailId(String emailId);
+
 }
