@@ -43,5 +43,5 @@ server port is configured to 8089 which can be changed in application.properties
 Go to the below url to view swagger-ui (API docs)
 
 ```
-http://localhost:9090/swagger-ui.html
+http://localhost:8089/swagger-ui.html
 ```
