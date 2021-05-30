@@ -1,5 +1,7 @@
 package com.hardik.killercroc.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +27,7 @@ public class EmployeeController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Creates a new employee record in the system")
 	public ResponseEntity<?> employeeCreationhandler(
-			@RequestBody(required = true) final EmployeeCreationRequestDto employeeCreationRequestDto) {
+			@Valid @RequestBody(required = true) final EmployeeCreationRequestDto employeeCreationRequestDto) {
 		return employeeService.createEmployee(employeeCreationRequestDto);
 	}
 }
