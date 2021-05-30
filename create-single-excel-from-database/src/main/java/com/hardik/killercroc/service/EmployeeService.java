@@ -1,5 +1,7 @@
 package com.hardik.killercroc.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,10 @@ public class EmployeeService {
 
 		employeeRepository.save(employee);
 		return ResponseEntity.ok("Employee Saved Successfully");
+	}
+
+	public List<Employee> getAllEmployees() {
+		return employeeRepository.findAll();
 	}
 
 }
