@@ -25,9 +25,8 @@ public class EmployeeDataPopulationOnBootstrap {
 	void populatingEmployeeDataInsideInMemoryDatabaseOnStartup() {
 		final var employeeList = new ArrayList<Employee>();
 		final var random = new Random();
-		final var jobTitleList = List.of("Owner", "CEO", "COO", "Backend Developer", "Frontend Developer",
-				"Database Admin", "Designer", "Human Resource Manager", "Project manager", "Android Developer",
-				"Web Developer", "System Engineer");
+		final var jobTitleList = List.of("Backend Developer", "Frontend Developer", "Database Admin", "Designer",
+				"Human Resource Manager", "Project manager", "Android Developer", "Web Developer", "System Engineer");
 
 		for (int i = 1; i < 300; i++) {
 			final var employee = new Employee();
@@ -40,7 +39,7 @@ public class EmployeeDataPopulationOnBootstrap {
 			employee.setEmailId(employee.getFirstName() + "." + employee.getLastName() + "@thelattice.in");
 			employee.setJoiningDate(LocalDate.of(random.ints(1, 1989, 2021).sum(), random.ints(1, 1, 13).sum(),
 					random.ints(1, 1, 26).sum()));
-			employee.setJobTitle(jobTitleList.stream().findAny().get());
+			employee.setJobTitle(jobTitleList.stream().skip(random.nextInt(jobTitleList.size())).findFirst().get());
 			employeeList.add(employee);
 		}
 
