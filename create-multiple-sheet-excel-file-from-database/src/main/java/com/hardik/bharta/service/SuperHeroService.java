@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hardik.bharta.dto.SuperHeroCreationRequestDto;
 import com.hardik.bharta.entity.SuperHero;
+import com.hardik.bharta.exception.DuplicateSuperHeroNameException;
 import com.hardik.bharta.repository.SuperHeroRepository;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,10 @@ public class SuperHeroService {
 	}
 
 	public ResponseEntity<?> create(final SuperHeroCreationRequestDto superHeroCreationRequest) {
+
+		if (existsByName(superHeroCreationRequest.getName()))
+			throw new DuplicateSuperHeroNameException();
+
 		final var superHero = new SuperHero();
 		superHero.setName(superHeroCreationRequest.getName());
 		superHero.setAlterEgo(superHeroCreationRequest.getAlterEgoName());
@@ -29,6 +34,10 @@ public class SuperHeroService {
 		superHeroRepository.save(superHero);
 
 		return ResponseEntity.ok("Super Hero Created Successfully");
+	}
+
+	public boolean existsByName(final String name) {
+		return superHeroRepository.existsByName(name);
 	}
 
 }

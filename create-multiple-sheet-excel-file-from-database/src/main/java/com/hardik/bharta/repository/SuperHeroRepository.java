@@ -10,4 +10,6 @@ import com.hardik.bharta.entity.SuperHero;
 @Repository
 public interface SuperHeroRepository extends JpaRepository<SuperHero, UUID> {
 
+	boolean existsByName(String name);
+
 }
