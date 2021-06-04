@@ -2,6 +2,8 @@ package com.hardik.bharta.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +39,7 @@ public class SuperHeroController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Creates super-hero record in system")
 	public ResponseEntity<?> superHeroCreationHandler(
-			@RequestBody(required = true) final SuperHeroCreationRequestDto superHeroCreationRequest) {
+			@Valid @RequestBody(required = true) final SuperHeroCreationRequestDto superHeroCreationRequest) {
 		return superHeroService.create(superHeroCreationRequest);
 	}
 
