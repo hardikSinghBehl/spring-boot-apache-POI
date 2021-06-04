@@ -2,6 +2,7 @@ package com.hardik.bharta.service;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class SuperHeroService {
 		superHero.setMasterComicId(superHeroCreationRequest.getComicId());
 		superHeroRepository.save(superHero);
 
-		return ResponseEntity.ok("Super Hero Created Successfully");
+		return ResponseEntity.ok(new JSONObject().put("message", "Super hero created successfully").toString());
 	}
 
 	public boolean existsByName(final String name) {

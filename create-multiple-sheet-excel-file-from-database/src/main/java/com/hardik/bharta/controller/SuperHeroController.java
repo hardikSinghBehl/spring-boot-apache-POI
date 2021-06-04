@@ -35,7 +35,7 @@ public class SuperHeroController {
 		return superHeroService.retreiveAll();
 	}
 
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Creates super-hero record in system")
 	public ResponseEntity<?> superHeroCreationHandler(
