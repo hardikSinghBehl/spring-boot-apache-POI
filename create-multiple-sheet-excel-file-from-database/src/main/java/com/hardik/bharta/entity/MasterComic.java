@@ -1,7 +1,7 @@
 package com.hardik.bharta.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +37,6 @@ public class MasterComic implements Serializable {
 	@Exclude
 	@JsonIgnore
 	@OneToMany(mappedBy = "masterComic", fetch = FetchType.LAZY)
-	private Set<SuperHero> superHeros;
+	private List<SuperHero> superHeros;
 
 }
