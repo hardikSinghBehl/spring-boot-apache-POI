@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hardik.killercroc.constant.ApiConstant;
 import com.hardik.killercroc.dto.EmployeeCreationRequestDto;
 import com.hardik.killercroc.service.EmployeeService;
 
@@ -18,14 +19,14 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/employee")
+@RequestMapping(value = ApiConstant.EMPLOYEE_CONTROLLER_BASE_PATH)
 public class EmployeeController {
 
 	private final EmployeeService employeeService;
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.OK)
-	@Operation(summary = "Creates a new employee record in the system")
+	@Operation(summary = ApiConstant.CREATE_EMPLOYEE_SUMMARY)
 	public ResponseEntity<?> employeeCreationhandler(
 			@Valid @RequestBody(required = true) final EmployeeCreationRequestDto employeeCreationRequestDto) {
 		return employeeService.createEmployee(employeeCreationRequestDto);

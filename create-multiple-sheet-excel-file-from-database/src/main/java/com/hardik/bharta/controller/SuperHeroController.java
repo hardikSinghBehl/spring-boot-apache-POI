@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hardik.bharta.constant.ApiConstant;
 import com.hardik.bharta.dto.SuperHeroCreationRequestDto;
 import com.hardik.bharta.entity.SuperHero;
 import com.hardik.bharta.service.SuperHeroService;
@@ -22,7 +23,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/super-hero")
+@RequestMapping(value = ApiConstant.SUPERHERO_CONTROLLER_BASE_PATH)
 @AllArgsConstructor
 public class SuperHeroController {
 
@@ -30,14 +31,14 @@ public class SuperHeroController {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@Operation(summary = "Returns list of superheroes stored in system")
+	@Operation(summary = ApiConstant.GET_HERO_LIST_SUMMARY)
 	public ResponseEntity<List<SuperHero>> superHeroRetreivalHandler() {
 		return superHeroService.retreiveAll();
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@Operation(summary = "Creates super-hero record in system")
+	@Operation(summary = ApiConstant.CREATE_HERO_SUMMARY)
 	public ResponseEntity<?> superHeroCreationHandler(
 			@Valid @RequestBody(required = true) final SuperHeroCreationRequestDto superHeroCreationRequest) {
 		return superHeroService.create(superHeroCreationRequest);
