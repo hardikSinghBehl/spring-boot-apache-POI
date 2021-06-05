@@ -1,5 +1,7 @@
 package com.hardik.bharta.controller;
 
+import java.io.IOException;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class ExcelController {
 
 	@GetMapping("/generate")
 	@ResponseStatus(value = HttpStatus.OK)
-	public ResponseEntity<InputStreamResource> generateAndDownloadExcelFile() {
+	public ResponseEntity<InputStreamResource> generateAndDownloadExcelFile() throws IOException {
 		return excelService.generate();
 	}
 
