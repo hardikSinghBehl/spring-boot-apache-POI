@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 public class ExcelService {
 
 	private final MasterComicRepository masterComicRepository;
-	private final List<String> workSheetNames = List.of("Detective Comics", "Marvel Comics");
+	private final List<String> workSheetNames = List.of("Detective Comics", "Marvel Comics", "Other");
 	private final List<String> columnNames = List.of("ID", "Name", "Alter Ego", "Comic", "Created-At");
 	private final XSSFWorkbook workBook = new XSSFWorkbook();
 

@@ -12,6 +12,7 @@ import com.hardik.bharta.repository.MasterComicRepository;
 import com.hardik.bharta.repository.SuperHeroRepository;
 
 import lombok.AllArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 
 @Component
 @AllArgsConstructor
@@ -50,4 +51,14 @@ public class DataPopulationOnBootstrap {
 		});
 	}
 
+	@PostConstruct
+	void populatingRandomSuperHeroData() {
+		for (int count = 0; count <= 30; count++) {
+			final var superHero = new SuperHero();
+			superHero.setAlterEgo(RandomString.make(5));
+			superHero.setName(RandomString.make(4) + RandomString.make(7));
+			superHero.setMasterComicId(3);
+			superHeroRepository.save(superHero);
+		}
+	}
 }
