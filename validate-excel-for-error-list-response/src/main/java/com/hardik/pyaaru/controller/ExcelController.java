@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hardik.pyaaru.annotation.IsXlsx;
 import com.hardik.pyaaru.service.ExcelService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,6 +39,7 @@ public class ExcelController {
 				.body(new InputStreamResource(excelService.getTemplate()));
 	}
 
+	@IsXlsx
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Validates Data in Excel File")
