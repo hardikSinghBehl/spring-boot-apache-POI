@@ -10,4 +10,6 @@ import com.hardik.pyaaru.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
+	boolean existsByEmailId(String cellValue);
+
 }
