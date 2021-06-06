@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.hardik.pyaaru.entity.Employee;
 
 @Repository
-public interface EmpoyeeRepository extends JpaRepository<Employee, UUID> {
+public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
 }
