@@ -28,7 +28,7 @@ public class ExcelController {
 
 	private final ExcelService excelService;
 
-	@GetMapping
+	@GetMapping(value = "/template")
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Download excel file template")
 	public ResponseEntity<InputStreamResource> excelTemplateFileDownloadHandler() throws IOException {
