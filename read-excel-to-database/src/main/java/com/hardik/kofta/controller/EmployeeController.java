@@ -1,5 +1,9 @@
 package com.hardik.kofta.controller;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +33,9 @@ public class EmployeeController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "bulk upload employee data in database")
 	public ResponseEntity<?> bulkUploadEmployeeDataHandler(
-			@Parameter @RequestParam(name = "code", required = true) final String code,
-			@Parameter @RequestParam(name = "file", required = true) final MultipartFile file) {
+			@Parameter @RequestParam(name = "code", required = true) final Integer code,
+			@Parameter @RequestParam(name = "file", required = true) final MultipartFile file)
+			throws NumberFormatException, ExecutionException, NoSuchAlgorithmException, IOException {
 		return employeeService.bulkUpload(code, file);
 	}
 

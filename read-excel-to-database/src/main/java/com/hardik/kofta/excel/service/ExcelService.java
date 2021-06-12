@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
+import com.hardik.kofta.entity.Employee;
 import com.hardik.kofta.exception.InvalidTemplateFormatException;
 import com.hardik.kofta.repository.EmployeeRepository;
 
@@ -119,6 +120,24 @@ public class ExcelService {
 				throw new InvalidTemplateFormatException();
 			}
 		}
+	}
+
+	public List<Employee> extractData(final MultipartFile file) throws IOException {
+		final var workBook = new XSSFWorkbook(file.getInputStream());
+		final var workSheet = workBook.getSheetAt(0);
+		final var numberOfRowsInWorkSheet = workSheet.getLastRowNum();
+		final var employees = new ArrayList<Employee>();
+
+		for (int row = 0; row < numberOfRowsInWorkSheet; row++) {
+			final var currentRow = workSheet.getRow(row + 1);
+			final var employee = new Employee();
+			employee.setEmailId(dataFormatter.formatCellValue(currentRow.getCell(0)));
+			employee.setFullName(dataFormatter.formatCellValue(currentRow.getCell(1)));
+			employee.setSalaryPerMonth(Double.valueOf(dataFormatter.formatCellValue(currentRow.getCell(2))));
+			employees.add(employee);
+		}
+		workBook.close();
+		return employees;
 	}
 
 }
