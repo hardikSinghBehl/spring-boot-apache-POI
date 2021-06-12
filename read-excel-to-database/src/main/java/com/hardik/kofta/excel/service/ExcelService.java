@@ -1,9 +1,14 @@
 package com.hardik.kofta.excel.service;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.validator.EmailValidator;
@@ -16,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
 import com.hardik.kofta.exception.InvalidTemplateFormatException;
 import com.hardik.kofta.repository.EmployeeRepository;
@@ -29,8 +35,9 @@ public class ExcelService {
 	private final List<String> columnNames = List.of("Email-id", "Full-Name", "Salary");
 	private final DataFormatter dataFormatter = new DataFormatter();
 	private final EmployeeRepository employeeRepository;
+	private final LoadingCache<Integer, String> loadingCache;
 
-	public ResponseEntity<?> validateData(final MultipartFile file) throws IOException {
+	public ResponseEntity<?> validateData(final MultipartFile file) throws IOException, NoSuchAlgorithmException {
 		final var workBook = new XSSFWorkbook(file.getInputStream());
 		final var workSheet = workBook.getSheetAt(0);
 		final var initialRow = workSheet.getRow(0);
@@ -62,7 +69,12 @@ public class ExcelService {
 		workBook.close();
 		if (errorMessages.size() == 0) {
 			final var response = new JSONObject();
-			response.put("message", "No Errors Found");
+			final var fileMessageDigest = MessageDigest.getInstance("MD5");
+			fileMessageDigest.update(file.getBytes());
+			final var fileHash = DatatypeConverter.printHexBinary(fileMessageDigest.digest()).toUpperCase();
+			final var code = new Random().ints(1, 100000, 999999).sum();
+			loadingCache.put(code, fileHash);
+			response.put("Code", code);
 			response.put("timestamp", LocalDateTime.now().toString());
 			return ResponseEntity.ok(response.toString());
 		}

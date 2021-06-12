@@ -1,6 +1,7 @@
 package com.hardik.kofta.controller;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +32,8 @@ public class ExcelController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@Operation(summary = "Validates Data in Excel File")
 	public ResponseEntity<?> validateExcelFileHandler(
-			@Parameter @RequestParam(name = "file", required = true) final MultipartFile file) throws IOException {
+			@Parameter @RequestParam(name = "file", required = true) final MultipartFile file)
+			throws IOException, NoSuchAlgorithmException {
 		return excelService.validateData(file);
 	}
 
