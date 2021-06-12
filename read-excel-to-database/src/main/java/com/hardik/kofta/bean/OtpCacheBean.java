@@ -1,6 +1,5 @@
 package com.hardik.kofta.bean;
 
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -17,17 +16,17 @@ import lombok.AllArgsConstructor;
 @Configuration
 @AllArgsConstructor
 @EnableConfigurationProperties(ExcelCacheConfigurationProperties.class)
-public class CacheBean {
+public class OtpCacheBean {
 
 	private final ExcelCacheConfigurationProperties excelCacheConfigurationProperties;
 
 	@Bean
-	public LoadingCache<UUID, Integer> loadingCache() {
-		final var expirationMinutes = excelCacheConfigurationProperties.getOtp().getExpirationMinutes();
+	public LoadingCache<Integer, String> loadingCache() {
+		final var expirationMinutes = excelCacheConfigurationProperties.getCode().getExpirationMinutes();
 		return CacheBuilder.newBuilder().expireAfterWrite(expirationMinutes, TimeUnit.MINUTES)
 				.build(new CacheLoader<>() {
-					public Integer load(UUID key) {
-						return 0;
+					public String load(Integer key) {
+						return "";
 					}
 				});
 	}

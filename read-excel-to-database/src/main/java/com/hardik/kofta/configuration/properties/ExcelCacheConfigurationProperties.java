@@ -8,10 +8,10 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "com.hardik.kofta")
 public class ExcelCacheConfigurationProperties {
 
-	private OTP otp = new OTP();
+	private Code code = new Code();
 
 	@Data
-	public class OTP {
+	public class Code {
 		private Integer expirationMinutes;
 	}
 
