@@ -76,6 +76,7 @@ public class ExcelService {
 			final var code = new Random().ints(1, 100000, 999999).sum();
 			loadingCache.put(code, fileHash);
 			response.put("Code", code);
+			response.put("message", "No Errors found, use this code and submitted file to bulk upload");
 			response.put("timestamp", LocalDateTime.now().toString());
 			return ResponseEntity.ok(response.toString());
 		}
