@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.xml.bind.DatatypeConverter;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.cache.LoadingCache;
+import com.hardik.kofta.entity.Employee;
 import com.hardik.kofta.excel.service.ExcelService;
 import com.hardik.kofta.exception.FileNotSameThatWasValidatedException;
 import com.hardik.kofta.exception.InvalidCodeException;
@@ -49,6 +51,10 @@ public class EmployeeService {
 		response.put("message", data.size() + " Employees data successfully saved to database");
 		response.put("timestamp", LocalDateTime.now().toString());
 		return ResponseEntity.ok(response.toString());
+	}
+
+	public ResponseEntity<List<Employee>> retreiveEmployees() {
+		return ResponseEntity.ok(employeeRepository.findAll());
 	}
 
 }
