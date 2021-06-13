@@ -6,6 +6,15 @@
 	<a target='_blank' href='https://read-excel-spring-boot-poi.herokuapp.com/kofta/swagger-ui.html'>RUNNING APPLICATION (Swagger-ui)</a>
 </center>
 
+## Application Flow
+
+* GET /excel/template API is hit to download excel template 
+* POST /excel API is hit to validate data inside excel following above downloaded template
+* Unique 6 digit code is provided when the excel is validated and is stored in a cache as a key, the value of the key is the hash of the validated excel file 
+* POST /employee/bulk-upload API is is hit with the provided code and the validated excel file
+* exception is thrown if code is invalid
+* exception is thrown if file other than the validated one is given (comparing file hashes with stored hash corresponding to given code in cache)
+* if code and excel files are valid, employee records are inserted into the database
 
 ## Tech Stack
 
