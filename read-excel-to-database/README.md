@@ -49,3 +49,7 @@ Go to the below url to view swagger-ui (API docs)
 ```
 http://localhost:8089/kofta/swagger-ui.html
 ```
+
+
+https://user-images.githubusercontent.com/69693621/121804360-96dfa580-cc63-11eb-8c5b-ae14d15d2871.mp4
+
