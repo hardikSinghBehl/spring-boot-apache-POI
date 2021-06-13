@@ -58,3 +58,6 @@ Go to the below url to view swagger-ui (API docs)
 ```
 http://localhost:8089/bharta/swagger-ui.html
 ```
+
+https://user-images.githubusercontent.com/69693621/121804452-15d4de00-cc64-11eb-9ddd-4f6215c1ed8f.mp4
+
