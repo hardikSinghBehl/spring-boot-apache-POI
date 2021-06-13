@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hardik.kofta.annotation.IsXlsx;
+import com.hardik.kofta.constant.ApiPath;
+import com.hardik.kofta.constant.ApiSummary;
 import com.hardik.kofta.excel.service.ExcelService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,14 +27,14 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/excel")
+@RequestMapping(value = ApiPath.EXCEL_BASE_PATH)
 public class ExcelController {
 
 	private final ExcelService excelService;
 
-	@GetMapping(value = "/template")
+	@GetMapping(value = ApiPath.EXCEL_TEMPLATE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@Operation(summary = "Download excel file template")
+	@Operation(summary = ApiSummary.EXCEL_TEMPLATE_DOWNLOAD)
 	public ResponseEntity<InputStreamResource> excelTemplateFileDownloadHandler() throws IOException {
 		final var template = Thread.currentThread().getContextClassLoader().getResourceAsStream("template.xlsx");
 		return ResponseEntity.status(HttpStatus.OK)
@@ -44,7 +46,7 @@ public class ExcelController {
 	@IsXlsx
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@Operation(summary = "Validates Data in Excel File")
+	@Operation(summary = ApiSummary.EXCEL_VALIDATE)
 	public ResponseEntity<?> validateExcelFileHandler(
 			@Parameter @RequestParam(name = "file", required = true) final MultipartFile file)
 			throws IOException, NoSuchAlgorithmException {
